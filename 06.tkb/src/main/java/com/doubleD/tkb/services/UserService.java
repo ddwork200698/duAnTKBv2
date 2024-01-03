@@ -10,4 +10,5 @@ import java.util.List;
 @Service
 public interface UserService {
     List<User> getAllUsers();
+    User insertUser(User user);
 }

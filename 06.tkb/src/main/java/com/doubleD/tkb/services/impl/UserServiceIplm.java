@@ -16,4 +16,9 @@ public class UserServiceIplm implements UserService {
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
+
+    @Override
+    public User insertUser(User user) {
+        return userRepo.save(user);
+    }
 }
