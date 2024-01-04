@@ -17,13 +17,13 @@ import java.util.List;
 import org.springframework.validation.FieldError;
 
 @RestController
-@RequestMapping("api/v2")
+@RequestMapping("api/v2/user")
 public class UserController {
     @Autowired
     UserServiceIplm userServiceIplm;
 
     //Get all User
-    // http://localhost:8088/api/v2/getAllUser
+    // http://localhost:8088/api/v2/user/getAllUser
     @GetMapping("/getAllUser")
     List<User> getAllUser(){
         return userServiceIplm.getAllUsers();
@@ -71,7 +71,7 @@ public class UserController {
     }
 
     // Get User by phone
-    // http://localhost:8088/api/v2/GetUserByPhoneNumber/0980000000
+    // http://localhost:8088/api/v2/user/GetUserByPhoneNumber/0980000000
     @GetMapping("/GetUserByPhoneNumber/{phoneNumber}")
     ResponseEntity<ResponseObject> getUserByPhoneNumber(@PathVariable String phoneNumber){
         return ResponseEntity.status(HttpStatus.OK).body(
