@@ -21,4 +21,9 @@ public class UserServiceIplm implements UserService {
     public User insertUser(User user) {
         return userRepo.save(user);
     }
+
+    @Override
+    public User getUserByPhoneNumber(String phoneNumber) {
+        return userRepo.findByPhoneNumber(phoneNumber);
+    }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserRepo extends JpaRepository<User, Integer> {
     @Override
     List<User> findAll();
-
+    User findByPhoneNumber(String phoneNumber);
 }

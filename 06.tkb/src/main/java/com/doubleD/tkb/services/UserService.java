@@ -11,4 +11,5 @@ import java.util.List;
 public interface UserService {
     List<User> getAllUsers();
     User insertUser(User user);
+    User getUserByPhoneNumber(String phoneNumber);
 }

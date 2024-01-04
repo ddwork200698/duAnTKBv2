@@ -40,26 +40,45 @@ public class UserController {
                     .stream()
                     .map(FieldError::getDefaultMessage)
                     .toList();
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new ResponseObject(
+                            "OK",
+                            "Insert thành công",
+                            errorMessages
+                    ));
         }
-        user.setCreated_at(new Date());
-        user.setUpdated_at(new Date());
+        user.setCreatedAt(new Date());
+        user.setUpdatedAt(new Date());
         User newUser = new User();
         try {
             newUser = userServiceIplm.insertUser(user);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new ResponseObject(
+                            "OK",
+                            "Insert thành công",
+                            newUser
+                    )
+            );
+
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.OK).body(
                     new ResponseObject(
                             "OK",
                             "Insert thành công",
-                            "Ko inseart thành công do trùng"
+                            e.getMessage()
                     ));
         }
+    }
+
+    // Get User by phone
+    // http://localhost:8088/api/v2/GetUserByPhoneNumber/0980000000
+    @GetMapping("/GetUserByPhoneNumber/{phoneNumber}")
+    ResponseEntity<ResponseObject> getUserByPhoneNumber(@PathVariable String phoneNumber){
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject(
-                        "OK",
-                        "Insert thành công",
-                        userServiceIplm.insertUser(user)
-                )
-        );
+            new ResponseObject(
+                    "OK",
+                    "Lấy thông tin user thành công",
+                    userServiceIplm.getUserByPhoneNumber(phoneNumber)
+            ));
     }
 }

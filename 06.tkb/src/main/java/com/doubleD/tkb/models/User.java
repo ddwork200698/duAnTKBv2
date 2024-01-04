@@ -17,21 +17,21 @@ public class User {
     private int id;
     private String fullname;
     @Column(unique = true)
-    private String phone_number;
+    private String phoneNumber;
     private String address;
     private String password;
-    private Date created_at;
-    private Date updated_at;
+    private Date createdAt;
+    private Date updatedAt;
     private int is_active;
     private int role_id;
 
     public User(String fullname, String phone_number, String address, String password, Date created_at, Date updated_at, int is_active, int role_id) {
         this.fullname = fullname;
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
         this.address = address;
         this.password = password;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.createdAt = created_at;
+        this.updatedAt = updated_at;
         this.is_active = is_active;
         this.role_id = role_id;
     }
