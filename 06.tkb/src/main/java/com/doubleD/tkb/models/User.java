@@ -1,8 +1,6 @@
 package com.doubleD.tkb.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
@@ -18,6 +16,7 @@ public class User {
     @Id
     private int id;
     private String fullname;
+    @Column(unique = true)
     private String phone_number;
     private String address;
     private String password;

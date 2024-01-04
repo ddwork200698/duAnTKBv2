@@ -9,7 +9,7 @@ INSERT INTO roles (name) VALUES ('user');
 CREATE TABLE users(
     id INT PRIMARY KEY AUTO_INCREMENT,
     fullname VARCHAR(100) DEFAULT '',
-    phone_number VARCHAR(10) NOT NULL,
+    phone_number VARCHAR(10) NOT NULL UNIQUE,
     address VARCHAR(200) DEFAULT '',
     password VARCHAR(100) NOT NULL DEFAULT '',
     created_at DATETIME,
