@@ -20,7 +20,7 @@ CREATE TABLE users(
 );
 
 -- Bảng đối tượng --
-CREATE TABLE objects(
+CREATE TABLE objectm(
     id INT PRIMARY KEY,
     name ENUM
         (

@@ -2,14 +2,13 @@ package com.doubleD.tkb.controllers;
 
 import com.doubleD.tkb.models.ResponseObject;
 import com.doubleD.tkb.models.User;
-import com.doubleD.tkb.services.impl.UserServiceIplm;
+import com.doubleD.tkb.services.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -20,13 +19,13 @@ import org.springframework.validation.FieldError;
 @RequestMapping("api/v2/user")
 public class UserController {
     @Autowired
-    UserServiceIplm userServiceIplm;
+    UserServiceImpl userServiceImpl;
 
     //Get all User
     // http://localhost:8088/api/v2/user/getAllUser
     @GetMapping("/getAllUser")
     List<User> getAllUser(){
-        return userServiceIplm.getAllUsers();
+        return userServiceImpl.getAllUsers();
     }
 
     //Insert User
@@ -51,7 +50,7 @@ public class UserController {
         user.setUpdatedAt(new Date());
         User newUser = new User();
         try {
-            newUser = userServiceIplm.insertUser(user);
+            newUser = userServiceImpl.insertUser(user);
             return ResponseEntity.status(HttpStatus.OK).body(
                     new ResponseObject(
                             "OK",
@@ -78,7 +77,7 @@ public class UserController {
             new ResponseObject(
                     "OK",
                     "Lấy thông tin user thành công",
-                    userServiceIplm.getUserByPhoneNumber(phoneNumber)
+                    userServiceImpl.getUserByPhoneNumber(phoneNumber)
             ));
     }
 }

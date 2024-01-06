@@ -1,7 +1,8 @@
 package com.doubleD.tkb.controllers;
 
 import com.doubleD.tkb.models.ResponseObject;
-import com.doubleD.tkb.services.impl.DepartmentServiceImpl;
+import com.doubleD.tkb.models.User;
+import com.doubleD.tkb.services.impl.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,22 +10,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("api/v2/department")
-public class DepartmentController {
-    @Autowired
-    DepartmentServiceImpl departmentServiceImpl;
+import java.util.List;
 
-    //Get all Department
-    // http://localhost:8088/api/v2/department
-    @GetMapping("/all")
-    ResponseEntity<ResponseObject> getAllDepartment(){
+@RestController
+@RequestMapping("api/v2/role")
+public class RoleController {
+    @Autowired
+    RoleServiceImpl roleServiceImpl;
+
+    //Get all Role
+    // http://localhost:8088/api/v2/role
+    @GetMapping("")
+    ResponseEntity<ResponseObject> getAllRole(){
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject(
                         "OK",
-                        "Lấy tất cả thông tin department thành công",
-                        departmentServiceImpl.getAllDepartment()
+                        "Lấy thành công All Data",
+                        roleServiceImpl.getAllRole()
                 )
         );
-    };
+    }
 }

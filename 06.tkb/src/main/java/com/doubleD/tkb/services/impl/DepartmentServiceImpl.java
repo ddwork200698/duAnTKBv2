@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DepartmentServiceIplm implements DepartmentService {
+public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     DepartmentRepo departmentRepo;
     @Override
