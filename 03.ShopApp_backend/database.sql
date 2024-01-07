@@ -46,12 +46,19 @@ CREATE TABLE social_accounts(
     NAME VARCHAR(350) COMMENT "Tên sản phẩm",
     price FLOAT NOT NULL CHECK
         (price >= 0),
-        url VARCHAR(100) DEFAULT '',
         description LONGTEXT DEFAULT '',
         created_at DATETIME,
         updated_at DATETIME,
         category_id INT,
         FOREIGN KEY(category_id) REFERENCES categories(id)
+);
+CREATE TABLE product_images(
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    CONSTRAINT fk_product_images_product_id
+        FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE,
+    url VARCHAR(100) DEFAULT ''
 );
 CREATE TABLE orders(
     id INT PRIMARY KEY AUTO_INCREMENT,

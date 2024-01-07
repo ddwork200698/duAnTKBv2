@@ -9,11 +9,13 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
-@Entity
-@Table(name = "products")
+//@Entity
+//@Table(name = "products")
 @Data
 @Setter
 @Getter
@@ -31,12 +33,5 @@ public class Product {
     private String description;
     @JsonProperty("category_id")
     private Long categoryId;
-
-    public Product(String name, Float price, String url, String description, Long categoryId) {
-        this.name = name;
-        this.price = price;
-        this.url = url;
-        this.description = description;
-        this.categoryId = categoryId;
-    }
+    private List<MultipartFile> files;
 }
