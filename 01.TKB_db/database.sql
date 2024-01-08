@@ -29,9 +29,9 @@ CREATE TABLE objectm(
             'Giáo dục thường xuyên'
         )
 );
-INSERT INTO objects (id, name) VALUES (0, 'Đại học cao đẳng');
-INSERT INTO objects (id, name) VALUES (1, 'Cấp 3, trải nghiệm');
-INSERT INTO objects (id, name) VALUES (2, 'Giáo dục thường xuyên');
+INSERT INTO objectm (id, name) VALUES (0, 'Đại học cao đẳng');
+INSERT INTO objectm (id, name) VALUES (1, 'Cấp 3, trải nghiệm');
+INSERT INTO objectm (id, name) VALUES (2, 'Giáo dục thường xuyên');
 -- Bảng khoa --
 CREATE TABLE departments(
     id VARCHAR(10) PRIMARY KEY,
@@ -54,7 +54,7 @@ CREATE TABLE subjects (
     department_id VARCHAR(10),
     FOREIGN KEY (department_id) REFERENCES departments(id),
     object_id INT,
-    FOREIGN KEY (object_id) REFERENCES objects(id)
+    FOREIGN KEY (object_id) REFERENCES objectm(id)
 );
 
 
