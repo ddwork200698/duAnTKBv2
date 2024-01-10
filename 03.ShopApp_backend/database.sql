@@ -40,10 +40,11 @@ CREATE TABLE social_accounts(
     FOREIGN KEY(user_id) REFERENCES users(id)
 ); CREATE TABLE categories(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    NAME VARCHAR(100) NOT NULL DEFAULT '' COMMENT 'Tên danh mục, vd: Đồ điện tử'
+    name VARCHAR(100) NOT NULL DEFAULT '' COMMENT 'Tên danh mục, vd: Đồ điện tử'
 ); CREATE TABLE products(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    NAME VARCHAR(350) COMMENT "Tên sản phẩm",
+    name VARCHAR(350) COMMENT "Tên sản phẩm",
+    thumbnail VARCHAR(255),
     price FLOAT NOT NULL CHECK
         (price >= 0),
         description LONGTEXT DEFAULT '',

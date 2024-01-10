@@ -1,13 +1,11 @@
 package com.doubleD.shopapp.controllers;
 
-import com.doubleD.shopapp.models.Order;
-import com.doubleD.shopapp.models.User;
+import com.doubleD.shopapp.DTO.OrderDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +18,7 @@ public class OrderController {
     //http://localhost:8088/api/v1/orders
     @PostMapping("")
     ResponseEntity<?> createOrder(
-            @Valid @RequestBody Order order,
+            @Valid @RequestBody OrderDTO orderDTO,
             BindingResult result
     ){
         try {
@@ -52,7 +50,7 @@ public class OrderController {
     @PutMapping("/{id}")
     ResponseEntity<?> updateOrderUsingId(
             @Valid @PathVariable("id") Long id,
-            @Valid @RequestBody Order order
+            @Valid @RequestBody OrderDTO orderDTO
     ){
         try{
             return ResponseEntity.ok().body("Success update Order using id: " + id);

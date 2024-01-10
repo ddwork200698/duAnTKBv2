@@ -1,4 +1,4 @@
-package com.doubleD.shopapp.models;
+package com.doubleD.shopapp.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class OrderDTO {
     private Long id;
     @JsonProperty("user_id")
     @NotNull(message = "user_id can not be null")

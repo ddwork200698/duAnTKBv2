@@ -1,8 +1,6 @@
-package com.doubleD.shopapp.models;
+package com.doubleD.shopapp.DTO;
 
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Data // to String
@@ -10,7 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Categories {
+public class CategoriesDTO {
     @NotEmpty (message = "Category's name cannot empty")
     private String name;
 }

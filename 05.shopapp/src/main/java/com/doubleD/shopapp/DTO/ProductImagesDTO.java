@@ -1,4 +1,4 @@
-package com.doubleD.shopapp.models;
+package com.doubleD.shopapp.DTO;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductImages {
+public class ProductImagesDTO {
     private Long id;
     @Column(name = "product_id")
     @NotNull(message = "product_id can not be null")

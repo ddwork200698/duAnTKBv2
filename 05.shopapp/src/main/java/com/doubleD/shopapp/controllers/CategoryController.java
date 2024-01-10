@@ -1,11 +1,10 @@
 package com.doubleD.shopapp.controllers;
 
-import com.doubleD.shopapp.models.Categories;
+import com.doubleD.shopapp.DTO.CategoriesDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class CategoryController {
     // Neu tham so truyen vao la dang doi tuong => Data Transfer Object = Request Object
     @PostMapping("")
     public ResponseEntity<?> insertCategory(
-            @Valid  @RequestBody Categories category,
+            @Valid  @RequestBody CategoriesDTO category,
             BindingResult result
     ){
         if(result.hasErrors()){

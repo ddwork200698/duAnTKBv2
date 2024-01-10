@@ -1,14 +1,12 @@
 package com.doubleD.shopapp.controllers;
 
-import com.doubleD.shopapp.models.User;
-import com.doubleD.shopapp.models.UserLogin;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.doubleD.shopapp.DTO.UserDTO;
+import com.doubleD.shopapp.DTO.UserLoginDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +17,7 @@ import java.util.List;
 public class UserController {
     @PostMapping("/register")
     ResponseEntity<?> createUser(
-            @Valid @RequestBody User user,
+            @Valid @RequestBody UserDTO userDTO,
             BindingResult result
     ){
         try {
@@ -38,7 +36,7 @@ public class UserController {
     }
     @PostMapping("/login")
     ResponseEntity<String> login(
-            @Valid @RequestBody UserLogin user
+            @Valid @RequestBody UserLoginDTO user
     ){
         return ResponseEntity.ok().body("some tokens");
     }

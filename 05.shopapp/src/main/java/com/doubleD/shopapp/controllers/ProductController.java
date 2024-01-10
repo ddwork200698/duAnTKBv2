@@ -1,10 +1,8 @@
 package com.doubleD.shopapp.controllers;
 
-import com.doubleD.shopapp.models.Categories;
-import com.doubleD.shopapp.models.Product;
+import com.doubleD.shopapp.DTO.ProductDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -12,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -51,7 +48,7 @@ public class ProductController {
     // http://localhost:8088/api/v1/products
     @PostMapping(value = "",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> insertProduct(
-            @Valid @ModelAttribute Product product,
+            @Valid @ModelAttribute ProductDTO productDTO,
             // @RequestPart("file") MultipartFile file,
              BindingResult result
     ){
@@ -63,7 +60,7 @@ public class ProductController {
                         .toList();
                 return ResponseEntity.badRequest().body(errorMessages);
             }
-            List<MultipartFile> files = product.getFiles();
+            List<MultipartFile> files = productDTO.getFiles();
             // Kiểm tra file upload có phải là null ko ?
             files = files == null ? new ArrayList<MultipartFile>() : files;
             for(MultipartFile file : files){
