@@ -29,9 +29,9 @@ CREATE TABLE objectm(
             'Giáo dục thường xuyên'
         )
 );
-INSERT INTO objectm (id, name) VALUES (0, 'Đại học cao đẳng');
-INSERT INTO objectm (id, name) VALUES (1, 'Cấp 3, trải nghiệm');
-INSERT INTO objectm (id, name) VALUES (2, 'Giáo dục thường xuyên');
+INSERT INTO objectm (id, name) VALUES (0, 'Đại học cao đẳng', "");
+INSERT INTO objectm (id, name) VALUES (1, 'Cấp 3, trải nghiệm', "");
+INSERT INTO objectm (id, name) VALUES (2, 'Giáo dục thường xuyên',"");
 -- Bảng khoa --
 CREATE TABLE departments(
     id VARCHAR(10) PRIMARY KEY,
@@ -42,7 +42,7 @@ INSERT INTO departments (id, name) VALUES ('QS', 'Quân sự');
 
 -- Bảng Thầy giáo
 CREATE TABLE teachers(
-    id VARCHAR(10) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     department_id VARCHAR(10),
     FOREIGN KEY (department_id) REFERENCES departments(id)
@@ -56,8 +56,26 @@ CREATE TABLE subjects (
     object_id INT,
     FOREIGN KEY (object_id) REFERENCES objectm(id)
 );
-
-
+-- Bảng lớp học --
+CREATE TABLE classes (
+    id INT PRIMARY KEY,
+    name VARCHAR(255) DEFAULT "",
+    school VARCHAR(255) DEFAULT "",
+    time_in DATETIME,
+    time_out DATETIME,
+    object_id INT,
+    FOREIGN KEY (object_id) REFERENCES objectm(id)
+);
+-- Lịch học --
+CREATE TABLE schedules (
+    id INT PRIMARY KEY,
+    time DATETIME,
+    class_id INT;
+    FOREIGN KEY (class_id) REFERENCES classes (id),
+    teacher_id INT,
+    FOREIGN KEY (teacher_id) REFERENCES teachers (id),
+    position VARCHAR(255) DEFAULT "",
+);
 
 -- Bảng bài học --
 -- id, tên, độ ưu tiên, ghi chú, id môn học
@@ -125,3 +143,5 @@ INSERT INTO lessons (id, name, priority, note, subject_id, type) VALUES ("TB3","
 INSERT INTO lessons (id, name, priority, note, subject_id, type) VALUES ("TB4","Thực hành tập bắn súng tiểu niên AK",12, "", 'CME 1004',"TH");
 INSERT INTO lessons (id, name, priority, note, subject_id, type) VALUES ("NLĐ","Thực hành ném Lựu đạn bài 1b",13, "", 'CME 1004',"TH");
 INSERT INTO lessons (id, name, priority, note, subject_id, type) VALUES ("KTBS","Kiểm tra môn D sau khi học hết môn D",14, "", 'CME 1004',"KT");
+
+INSERT INTO classes (id, name, object_id) VALUES (0, "A1", 0);
