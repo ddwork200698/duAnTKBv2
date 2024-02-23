@@ -18,14 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
-    @Id
-    private Long id;
     @Size(min=3, max= 200, message="Độ dài từ 3 đến 200 ký tự")
     private String name;
     @Min(value = 0, message = "Price must be greater than or equal to 0")
     @Max(value = 100000000, message = "Price must be less than r equal to 10.000.000")
     private Float price;
-    private String url;
+    private String thumbnail;
     private String description;
     @JsonProperty("category_id")
     private Long categoryId;

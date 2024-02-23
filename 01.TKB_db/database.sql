@@ -18,7 +18,6 @@ CREATE TABLE users(
     role_id INT,
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
-
 -- Bảng đối tượng --
 CREATE TABLE objectm(
     id INT PRIMARY KEY,
@@ -32,6 +31,18 @@ CREATE TABLE objectm(
 INSERT INTO objectm (id, name) VALUES (0, 'Đại học cao đẳng');
 INSERT INTO objectm (id, name) VALUES (1, 'Cấp 3, trải nghiệm');
 INSERT INTO objectm (id, name) VALUES (2, 'Giáo dục thường xuyên');
+-- Bảng danh sách lớp --
+CREATE TABLE classm(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(10) DEFAULT '',
+    object_id INT,
+    FOREIGN KEY (object_id) REFERENCES objectm(id)
+);
+INSERT INTO classm (name, object_id) VALUES ("DH01", 0);
+INSERT INTO classm (name, object_id) VALUES ("DH02", 0);
+INSERT INTO classm (name, object_id) VALUES ("DH03", 0);
+INSERT INTO classm (name, object_id) VALUES ("DH04", 0);
+
 -- Bảng khoa --
 CREATE TABLE departments(
     id VARCHAR(10) PRIMARY KEY,
@@ -42,11 +53,19 @@ INSERT INTO departments (id, name) VALUES ('QS', 'Quân sự');
 
 -- Bảng Thầy giáo
 CREATE TABLE teachers(
-    id VARCHAR(10) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     department_id VARCHAR(10),
     FOREIGN KEY (department_id) REFERENCES departments(id)
 );
+INSERT INTO teachers (name, department_id) VALUES ("Le Duy A", "CT")
+INSERT INTO teachers (name, department_id) VALUES ("Le Duy B", "CT")
+INSERT INTO teachers (name, department_id) VALUES ("Le Duy C", "CT")
+INSERT INTO teachers (name, department_id) VALUES ("Le Duy D", "CT")
+INSERT INTO teachers (name, department_id) VALUES ("Nguyễn Văn A", "QS")
+INSERT INTO teachers (name, department_id) VALUES ("Nguyễn Văn B", "QS")
+INSERT INTO teachers (name, department_id) VALUES ("Nguyễn Văn C", "QS")
+INSERT INTO teachers (name, department_id) VALUES ("Nguyễn Văn D", "QS")
 -- Bảng môn học --
 CREATE TABLE subjects (
     id VARCHAR(10) PRIMARY KEY,
@@ -56,8 +75,6 @@ CREATE TABLE subjects (
     object_id INT,
     FOREIGN KEY (object_id) REFERENCES objectm(id)
 );
-
-
 
 -- Bảng bài học --
 -- id, tên, độ ưu tiên, ghi chú, id môn học
@@ -71,7 +88,24 @@ CREATE TABLE lessons(
     type ENUM('TH', 'LT', 'KT')
 );
 
-USE dbtkb;
+-- Bảng lịch dạy học --
+CREATE TABLE schedule (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    ngay_hoc DATETIME,
+    buoi_hoc ENUM
+    (
+        'Sáng',
+        'Chiều',
+        'Tối'
+    ),
+    class_id INT,
+    FOREIGN KEY (class_id) REFERENCES classm(id),
+    lesson_id VARCHAR(10),
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id),
+    teacher_id INT,
+    FOREIGN KEY (teacher_id) REFERENCES teachers(id),
+);
+
 INSERT INTO subjects (id, name, department_id, object_id) VALUES ('CME 1001', 'Đường lối quốc phòng và an ninh của Đảng Cộng sản Việt Nam', 'CT', 0);
 INSERT INTO subjects (id, name, department_id, object_id) VALUES ('CME 1002', 'Công tác Quốc phòng và An ninh', 'CT', 0);
 INSERT INTO subjects (id, name, department_id, object_id) VALUES ('CME 1003', 'Quân sự chung', 'QS', 0);

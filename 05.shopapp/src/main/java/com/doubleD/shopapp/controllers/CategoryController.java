@@ -1,7 +1,9 @@
 package com.doubleD.shopapp.controllers;
 
-import com.doubleD.shopapp.DTO.CategoriesDTO;
+import com.doubleD.shopapp.DTO.CategoryDTO;
+import com.doubleD.shopapp.services.CategoryService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -15,6 +17,8 @@ import static java.util.Arrays.stream;
 @RestController
 @RequestMapping("api/v1/categories")
 public class CategoryController {
+    @Autowired
+    CategoryService categoryService;
     // Hien thi tat ca categories
     // http://localhost:8088/api/v1/categories?page=1&limit=10
     @GetMapping("")
@@ -27,7 +31,7 @@ public class CategoryController {
     // Neu tham so truyen vao la dang doi tuong => Data Transfer Object = Request Object
     @PostMapping("")
     public ResponseEntity<?> insertCategory(
-            @Valid  @RequestBody CategoriesDTO category,
+            @Valid  @RequestBody CategoryDTO category,
             BindingResult result
     ){
         if(result.hasErrors()){
@@ -37,14 +41,17 @@ public class CategoryController {
                     .toList();
             return ResponseEntity.badRequest().body(errorMessages);
         }
-        return ResponseEntity.ok("insetCategory: " + category);
+        return ResponseEntity.ok("insetCategory: " + categoryService.createCategory(category));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCategory(@PathVariable Long id){
-        return ResponseEntity.ok("updateCategory with id: " + id);
+    public ResponseEntity<?> updateCategory(
+            @PathVariable Long id,
+            @RequestBody CategoryDTO categoryDTO){
+        return ResponseEntity.ok("updateCategory with id: " + categoryService.updateCategory(id, categoryDTO));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id){
+        categoryService.deleteCategory(id);
         return ResponseEntity.ok("deleteCategory with id: " + id);
     }
 }

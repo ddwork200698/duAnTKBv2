@@ -1,5 +1,6 @@
 package com.doubleD.shopapp.services;
 
+import com.doubleD.shopapp.DTO.CategoryDTO;
 import com.doubleD.shopapp.models.Category;
 import com.doubleD.shopapp.repositories.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,11 @@ public class CategoryService implements ICategoryService{
     @Autowired
     CategoryRepo categoryRepo;
     @Override
-    public Category createCategory(Category category) {
-        return categoryRepo.save(category);
+    public Category createCategory(CategoryDTO categoryDTO) {
+        Category newCategory = Category.builder()
+                            .name(categoryDTO.getName())
+                            .build();
+        return categoryRepo.save(newCategory);
     }
 
     @Override
@@ -28,9 +32,10 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public Category updateCategory(Long id, Category category) {
+    public Category updateCategory(Long id, CategoryDTO categoryDTO) {
         Category existingCategory = getCategoryById(id);
-        existingCategory.setName(category.getName());
+        existingCategory.setName(categoryDTO.getName());
+        categoryRepo.save(existingCategory);
         return existingCategory;
     }
 

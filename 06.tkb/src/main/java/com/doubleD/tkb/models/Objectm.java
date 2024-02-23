@@ -14,5 +14,4 @@ public class Objectm {
     @Id
     private int id;
     private String name;
-
 }

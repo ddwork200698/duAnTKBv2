@@ -1,7 +1,11 @@
 package com.doubleD.shopapp.controllers;
 
 import com.doubleD.shopapp.DTO.ProductDTO;
+import com.doubleD.shopapp.DTO.ProductImagesDTO;
+import com.doubleD.shopapp.models.Product;
+import com.doubleD.shopapp.services.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +27,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/v1/products")
 public class ProductController {
+    @Autowired
+    ProductService productService;
     // Hien thi tat ca products
     // http://localhost:8088/api/v1/products?page=1&limit=10
     @GetMapping("")
@@ -60,9 +66,11 @@ public class ProductController {
                         .toList();
                 return ResponseEntity.badRequest().body(errorMessages);
             }
+            Product newProduct = productService.createProduct(productDTO);
             List<MultipartFile> files = productDTO.getFiles();
             // Kiểm tra file upload có phải là null ko ?
             files = files == null ? new ArrayList<MultipartFile>() : files;
+            String fileName = "";
             for(MultipartFile file : files){
                 if (file.getSize() == 0){
                     continue;
@@ -78,6 +86,13 @@ public class ProductController {
                 // Lưu file và lấy uniqueFilename
                 String uniqueFilename = storeFile(file);
                 // Lưu đối tượng vào CSDL
+                productService.createProductImages(
+                        newProduct.getId(),
+                        ProductImagesDTO.builder()
+                                .productID(newProduct.getId())
+                                .url(uniqueFilename)
+                                .build()
+                );
             }
             return ResponseEntity.ok("inset Product thanh cong");
         } catch (Exception e){
